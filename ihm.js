@@ -36,6 +36,28 @@ function chargement(){
         });
         chargement();
         break;
+      case '4':
+        var vues = [];
+        rl.question("Quel mot recherchez-vous ? : ", function(recherche) {
+          service.listerSessions(function(values) {
+            values.forEach(function(val) {
+              var lowerName = (val.name).toLowerCase();
+               if (lowerName.includes(recherche.toLowerCase())) {
+                 vues.push({
+                   "session":val
+                 });
+               }
+            });
+         });
+       });
+        var i = 1;
+        vues.forEach(function(vue){
+          console.log(i+". "+vue.name);
+          i++;
+        })
+        menu.menuSession();
+        chargement();
+        break;
       case '99':
         rl.close();
         break;
